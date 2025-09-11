@@ -1,13 +1,17 @@
 using System.Linq;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public Animator anim;
+    public Joystick joystick;
 
-    public float speed = 5f;
+    public float speed = 1.5f;
+    private bool isRunning = false;
     public float jumpForce = 5f;
     private Vector3 moveInput;
     private bool isGrounded = true;
@@ -23,28 +27,41 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isRunning) speed = 3f;
+        else speed = 1.5f;
         if (!isGrounded) return;
-        
-            if (moveInput == Vector3.zero)
-            {
-                ChangeState(PlayerState.Idle);
-            }
-            else if (moveInput != Vector3.zero)
-            {
-                ChangeState(PlayerState.Walk);
-            }
+        if (moveInput == Vector3.zero)
+        {
+            ChangeState(PlayerState.Idle);
+        }
+        else if (moveInput != Vector3.zero && !isRunning)
+        {
+            ChangeState(PlayerState.Walk);
+        }
+        else if (isRunning)
+        {
+            ChangeState(PlayerState.Run);
+        }
         
 
     }
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector3(moveInput.x * speed, rb.linearVelocity.y, moveInput.z * speed);
+        HandleRotation();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
         var moveInput2D = context.ReadValue<Vector2>();
         moveInput = new Vector3(moveInput2D.x, 0, moveInput2D.y);
+    }
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isRunning = true;
+        }
+        else isRunning = false;
     }
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -56,6 +73,23 @@ public class PlayerMovement : MonoBehaviour
             ChangeState(PlayerState.Jump);
         }
     }
+    public void HandleRotation()
+    {
+        if (moveInput != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(moveInput);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * 10f);
+        }
+    }
+    public void JumpByButton()
+    {
+        if (!isGrounded) return;
+        isGrounded = false;
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        Debug.Log("Jump");
+        ChangeState(PlayerState.Jump);
+
+    }
 
     public void EndAnim()
     {
@@ -66,7 +100,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if(playerState==PlayerState.Jump)ChangeState(PlayerState.JumpLand);
+            if (playerState == PlayerState.Jump && moveInput == Vector3.zero) ChangeState(PlayerState.JumpLand);
+            else isGrounded = true;
         }
     }
     void OnCollisionExit(Collision collision)
