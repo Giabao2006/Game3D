@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cursor.visible = false;
         if (isRunning) speed = 3f;
         else speed = 1.5f;
         if (!isGrounded) return;
