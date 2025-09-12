@@ -8650,7 +8650,7 @@ MonoBehaviour:
   orientation: {fileID: 950101288}
   speed: 10
   isRunning: 0
-  jumpForce: 10
+  jumpForce: 5
   moveInput2D: {x: 0, y: 0}
   moveInput: {x: 0, y: 0, z: 0}
   groundLayer:
@@ -8919,6 +8919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pointText: {fileID: 454028177}
+  fxPrefab: {fileID: 1329845292236604, guid: 0e88fcc1d65ad1c4eae34ab56ff632f0, type: 3}
 --- !u!64 &33337728155910889
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class PointCollect : MonoBehaviour
 {
     private int point = 0;
     public TextMeshProUGUI pointText;
+    public GameObject fxPrefab; // prefab hiệu ứng FX
     void Start()
     {
 
@@ -21,11 +22,19 @@ public class PointCollect : MonoBehaviour
         point += p;
         UpdatePoint();
     }
+    void SpawnFX()
+    {
+        if (fxPrefab != null)
+        {
+            Instantiate(fxPrefab, transform.position, Quaternion.identity);
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             PlusPoint(1);
+            SpawnFX();
             Destroy(gameObject);
         }
     }
