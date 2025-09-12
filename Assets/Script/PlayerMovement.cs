@@ -9,12 +9,15 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public Animator anim;
     public Joystick joystick;
+    public Transform orientation;
 
     public float speed = 1.5f;
-    private bool isRunning = false;
+    public bool isRunning = false;
     public float jumpForce = 5f;
-    private Vector3 moveInput;
+    public Vector2 moveInput2D;
+    public Vector3 moveInput;
     private bool isGrounded = true;
+    public LayerMask groundLayer;
     private PlayerState playerState;
 
 
@@ -23,10 +26,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
-
     // Update is called once per frame
     void Update()
     {
+        
         
         if (isRunning) speed = 3f;
         else speed = 1.5f;
@@ -43,19 +46,21 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeState(PlayerState.Run);
         }
-        
-
     }
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(moveInput.x * speed, rb.linearVelocity.y, moveInput.z * speed);
+        moveInput = moveInput2D.x * orientation.right + moveInput2D.y * orientation.forward;
+        moveInput.y = 0;
+       rb.linearVelocity = new Vector3(moveInput.x * speed, rb.linearVelocity.y, moveInput.z * speed);
         HandleRotation();
+        
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        var moveInput2D = context.ReadValue<Vector2>();
-        moveInput = new Vector3(moveInput2D.x, 0, moveInput2D.y);
+        moveInput2D = context.ReadValue<Vector2>();
+        
     }
+
     public void OnRun(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -99,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (playerState == PlayerState.Jump && moveInput == Vector3.zero) ChangeState(PlayerState.JumpLand);
             else isGrounded = true;
@@ -107,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
         }
@@ -126,12 +131,9 @@ public class PlayerMovement : MonoBehaviour
         else if (playerState == PlayerState.Dance) anim.SetBool("isDance", true);
         else if (playerState == PlayerState.Jump)anim.SetBool("isJump", true);
         else if (playerState == PlayerState.JumpLand) anim.SetTrigger("isJumpLand");
-
     }
     public enum PlayerState
     {
         Idle, Walk, Run, Jump,JumpLand, Dance
     }
-    
-
 }
