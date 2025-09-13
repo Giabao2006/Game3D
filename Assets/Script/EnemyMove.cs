@@ -15,7 +15,7 @@ public class EnemyMove : MonoBehaviour
     public Transform playerTransform;
     public Transform castleTransform;
     public float chaseDistance = 7f;
-    public float unchaseDistance = 15f;
+    public float unchaseDistance = 13f;
     public float attackDistance = 0.5f;
     
     public EnemyState enemyState;
@@ -73,7 +73,7 @@ public class EnemyMove : MonoBehaviour
         
         }
         
-        OnDrawGizmos();
+        //OnDrawGizmos();
     }
     public void ChangeState(EnemyState newState)
     {
