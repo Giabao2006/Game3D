@@ -14,8 +14,8 @@ public class EnemyMove : MonoBehaviour
     public NavMeshAgent agent;
     public Transform playerTransform;
     public Transform castleTransform;
-    public float chaseDistance = 5f;
-    public float unchaseDistance = 10f;
+    public float chaseDistance = 7f;
+    public float unchaseDistance = 15f;
     public float attackDistance = 0.5f;
     
     public EnemyState enemyState;

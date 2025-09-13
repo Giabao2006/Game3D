@@ -143,9 +143,10 @@ public class PlayerMovement : MonoBehaviour
         else if (playerState == PlayerState.Run) anim.SetBool("isRun", true);
         else if (playerState == PlayerState.Attack)
         {
-            anim.SetTrigger("isAttack");
-            var atfx = Instantiate(attackFX, transform.position + transform.forward*2, transform.rotation);
+
+            var atfx = Instantiate(attackFX, transform.position + transform.forward * 2, transform.rotation);
             Destroy(atfx, 1f);
+            anim.SetTrigger("isAttack");
         }
         else if (playerState == PlayerState.Dance) anim.SetBool("isDance", true);
         else if (playerState == PlayerState.Jump) anim.SetBool("isJump", true);
