@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = true;
     public LayerMask groundLayer;
     private PlayerState playerState;
+    public GameObject attackFX;
+
 
 
     void Start()
@@ -79,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
             ChangeState(PlayerState.Jump);
         }
     }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed && isGrounded) ChangeState(PlayerState.Attack);
+    }
+
     public void HandleRotation()
     {
         if (moveInput != Vector3.zero)
@@ -94,7 +101,13 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         Debug.Log("Jump");
         ChangeState(PlayerState.Jump);
-
+    }
+    public void AttackbyButton()
+    {
+        if (isGrounded)
+        {
+            ChangeState(PlayerState.Attack);
+        }
     }
 
     public void EndAnim()
@@ -128,12 +141,18 @@ public class PlayerMovement : MonoBehaviour
         if (playerState == PlayerState.Idle) anim.SetBool("isIdle", true);
         else if (playerState == PlayerState.Walk) anim.SetBool("isWalk", true);
         else if (playerState == PlayerState.Run) anim.SetBool("isRun", true);
+        else if (playerState == PlayerState.Attack)
+        {
+            anim.SetTrigger("isAttack");
+            var atfx = Instantiate(attackFX, transform.position + transform.forward*2, transform.rotation);
+            Destroy(atfx, 1f);
+        }
         else if (playerState == PlayerState.Dance) anim.SetBool("isDance", true);
-        else if (playerState == PlayerState.Jump)anim.SetBool("isJump", true);
+        else if (playerState == PlayerState.Jump) anim.SetBool("isJump", true);
         else if (playerState == PlayerState.JumpLand) anim.SetTrigger("isJumpLand");
     }
     public enum PlayerState
     {
-        Idle, Walk, Run, Jump,JumpLand, Dance
+        Idle, Walk, Run, Jump,JumpLand, Dance,Attack
     }
 }

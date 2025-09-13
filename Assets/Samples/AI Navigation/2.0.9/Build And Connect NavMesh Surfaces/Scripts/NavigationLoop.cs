@@ -20,10 +20,11 @@ namespace Unity.AI.Navigation.Samples
 
         void Update()
         {
+            Debug.Log(goals.Length);
             float distance = Vector3.Distance(m_Agent.transform.position, goals[m_NextGoal].position);
             if (distance < 0.5f)
             {
-                m_NextGoal = m_NextGoal != 2 ? m_NextGoal + 1 : 0;
+                m_NextGoal = m_NextGoal != goals.Length-1 ? m_NextGoal + 1 : 0;
             }
             m_Agent.destination = goals[m_NextGoal].position;
         }
