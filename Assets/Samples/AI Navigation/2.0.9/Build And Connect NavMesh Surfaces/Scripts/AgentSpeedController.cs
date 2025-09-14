@@ -18,16 +18,13 @@ public class AgentSpeedController : MonoBehaviour
     {
         if (m_Agent == null)
             m_Agent = GetComponent<NavMeshAgent>();
-
-        
-    }
-    void FixedUpdate()
-    {
-        if (m_Agent != null)
+            if (m_Agent != null)
         {
             m_Agent.SetDestination(m_Target.position);
             MaxSpeedInStraightLine = m_Agent.speed;
         }/// cái này lôi từ OnEnable ra để lấy speed ban đầu của agent
+
+        
     }
 
     void Update()

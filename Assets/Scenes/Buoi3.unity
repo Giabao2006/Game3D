@@ -10111,6 +10111,7 @@ GameObject:
   - component: {fileID: 5866666021321508757}
   - component: {fileID: 5866666021321508758}
   - component: {fileID: 5866666021321508759}
+  - component: {fileID: 5866666021321508760}
   m_Layer: 0
   m_Name: Maw J Laygo@Mutant Walking
   m_TagString: Untagged
@@ -11544,7 +11545,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148675675985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 979093bced9f2f94c8206ce0b3eb0d22, type: 3}
   m_Name: 
@@ -11556,7 +11557,41 @@ MonoBehaviour:
   castleTransform: {fileID: 525406144}
   chaseDistance: 5
   unchaseDistance: 10
-  attackDistance: 0.8
+  attackDistance: 1.5
+  enemyState: 0
+  anim: {fileID: 0}
+--- !u!114 &5866666021321508760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148675675985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5278fa6bcdef5459775cbf0ed927ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  navigationLoop: {fileID: 0}
+  agentSpeedController: {fileID: 0}
+  m_agent: {fileID: 0}
+  playerTransform: {fileID: 2084820794}
+  castleTransform: {fileID: 525406144}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  chaseDistance: 7
+  unchaseDistance: 13
+  attackDistance: 0.5
+  isChase: 0
+  goals:
+  - {fileID: 281789388}
+  - {fileID: 761079409}
+  - {fileID: 1778938354}
+  - {fileID: 1104913284}
   enemyState: 0
   anim: {fileID: 0}
 --- !u!4 &5901452234742419304

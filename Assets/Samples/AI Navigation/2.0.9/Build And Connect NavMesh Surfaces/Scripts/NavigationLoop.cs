@@ -9,10 +9,11 @@ namespace Unity.AI.Navigation.Samples
     [RequireComponent(typeof(NavMeshAgent))]
     public class NavigationLoop : MonoBehaviour
     {
+       
         NavMeshAgent m_Agent;
         public Transform[] goals = new Transform[3];
-        private int m_NextGoal = 1;
-
+        private int m_NextGoal = 0;
+        
         void Start()
         {
             m_Agent = GetComponent<NavMeshAgent>();
@@ -20,7 +21,6 @@ namespace Unity.AI.Navigation.Samples
 
         void Update()
         {
-            Debug.Log(goals.Length);
             float distance = Vector3.Distance(m_Agent.transform.position, goals[m_NextGoal].position);
             if (distance < 0.5f)
             {
