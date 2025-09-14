@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public SettingSound settingSound;
     public Rigidbody rb;
     public Animator anim;
     public Joystick joystick;
@@ -144,9 +145,10 @@ public class PlayerMovement : MonoBehaviour
         else if (playerState == PlayerState.Attack)
         {
 
-            var atfx = Instantiate(attackFX, transform.position + transform.forward * 2, transform.rotation);
-            Destroy(atfx, 1f);
+            //var atfx = Instantiate(attackFX, transform.position + transform.forward * 2, transform.rotation);
+            //Destroy(atfx, 1f);
             anim.SetTrigger("isAttack");
+            //settingSound.BuySound();
         }
         else if (playerState == PlayerState.Dance) anim.SetBool("isDance", true);
         else if (playerState == PlayerState.Jump) anim.SetBool("isJump", true);

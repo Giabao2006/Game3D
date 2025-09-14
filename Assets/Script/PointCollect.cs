@@ -4,25 +4,9 @@ using TMPro;
 
 public class PointCollect : MonoBehaviour
 {
-    private int point = 0;
-    public TextMeshProUGUI pointText;
+    public GameManager gameManager;
     public GameObject fxPrefab; // prefab hiệu ứng FX
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void UpdatePoint()
-    {
-        pointText.text = "Point: " + point.ToString();
-    }
-    void PlusPoint(int p)
-    {
-        point += p;
-        UpdatePoint();
-    }
-    void SpawnFX()
+    public void SpawnFX()
     {
         if (fxPrefab != null)
         {
@@ -33,7 +17,7 @@ public class PointCollect : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlusPoint(1);
+            gameManager.PlusPoint(1);
             SpawnFX();
             Destroy(gameObject);
         }
