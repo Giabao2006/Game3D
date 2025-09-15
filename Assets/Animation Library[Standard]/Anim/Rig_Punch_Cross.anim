@@ -12403,7 +12403,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.8
+        time: 0.73333335
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -12414,7 +12414,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_IsTrigger
+    attribute: m_Enabled
     path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R
     classID: 136
     script: {fileID: 0}
@@ -12429,7 +12429,7 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 3864926053
-      attribute: 2693561734
+      attribute: 3305885265
       script: {fileID: 0}
       typeID: 136
       customType: 0
@@ -26077,7 +26077,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.8
+        time: 0.73333335
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -26088,7 +26088,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_IsTrigger
+    attribute: m_Enabled
     path: Root/Hips/Spine_01/Spine_02/Spine_03/Clavicle_R/Shoulder_R/Elbow_R/Hand_R
     classID: 136
     script: {fileID: 0}

@@ -23,17 +23,26 @@ public class PlayerHealth : MonoBehaviour
     }
 void Update()
     {
+        if (currentHP <= 0) return;
        playerCanvas.transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
     }
-public void CapNhatMau(int amount)
-{
-    currentHP += amount;
-    healthBar.fillAmount = (float)currentHP / maxHP;
-    healthText.text = currentHP + "/" + maxHP;
-    if (currentHP <= 0)
+    public void CapNhatMau(int amount)
     {
-        currentHP = 0;
-        gameObject.SetActive(false);
+        currentHP += amount;
+        healthBar.fillAmount = (float)currentHP / maxHP;
+        healthText.text = currentHP + "/" + maxHP;
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            gameObject.SetActive(false);
+        }
     }
-}
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Dead"))
+        {
+            GameManager.Instance.LoadCheckPoint();
+            CapNhatMau(-1);
+        }
+    }
 }

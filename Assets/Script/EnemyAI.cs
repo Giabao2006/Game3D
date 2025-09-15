@@ -99,6 +99,8 @@ public void ChangeState(EnemyState newState)
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
+        Gizmos.DrawWireSphere(castleTransform.position, chaseDistance);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(castleTransform.position, unchaseDistance);
     }
 }
