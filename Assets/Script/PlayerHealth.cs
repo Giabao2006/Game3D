@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     private Camera _cam;
-    public int maxHP=100 ; // Maximum health points of the enemy
+    public int maxHP=3 ; // Maximum health points of the enemy
     public int currentHP; // Current health points of the enemy
     private float deltaTime = 0f; // Time since the last frame
     public Canvas playerCanvas;

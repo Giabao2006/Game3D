@@ -4,7 +4,6 @@ using TMPro;
 
 public class PointCollect : MonoBehaviour
 {
-    public GameManager gameManager;
     public GameObject fxPrefab; // prefab hiệu ứng FX
     public void SpawnFX()
     {
@@ -17,7 +16,7 @@ public class PointCollect : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            gameManager.PlusPoint(1);
+            GameManager.Instance.PlusPoint(1);
             SpawnFX();
             Destroy(gameObject);
         }
