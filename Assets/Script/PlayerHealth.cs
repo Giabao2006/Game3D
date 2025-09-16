@@ -35,6 +35,7 @@ void Update()
         {
             currentHP = 0;
             gameObject.SetActive(false);
+            GameManager.Instance.ShowLoseUI();
         }
     }
     void OnCollisionEnter(Collision collision)

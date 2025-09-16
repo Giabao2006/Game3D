@@ -16,9 +16,11 @@ public class PointCollect : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+
             GameManager.Instance.PlusPoint(1);
             SpawnFX();
             Destroy(gameObject);
+             GameManager.Instance.ShowWinUI();
         }
     }
 }

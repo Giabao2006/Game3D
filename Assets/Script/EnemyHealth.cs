@@ -32,10 +32,11 @@ public class EnemyHealth : MonoBehaviour
     currentHP += amount;
     healthBar.fillAmount = (float)currentHP / maxHP;
     healthText.text = currentHP + "/" + maxHP;
-    if (currentHP <= 0)
-    {
-        currentHP = 0;
-        gameObject.SetActive(false);
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            gameObject.SetActive(false);
+            GameManager.Instance.UpdateEnemyKilled(1);
     }
 }
 }

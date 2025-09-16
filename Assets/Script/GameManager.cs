@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
     public Vector3 currentCheckPoint;
 
     [Header("Enemy")]
-    private int enemyKilled = 0;
+    public int enemyKilled = 0;
 
     [Header("Point")]
-    private int point = 0;
+    public int point = 0;
     public TextMeshProUGUI pointText;
+
+    public GameObject winUI;
+    public GameObject loseUI;
     void Awake()
     {
         if (GameManager.instance == null || GameManager.instance != this) GameManager.instance = this;
@@ -51,4 +54,13 @@ public class GameManager : MonoBehaviour
     {
         enemyKilled += c;
     }
+    public void ShowWinUI()
+    {
+        winUI.SetActive(true);
+    }
+    public void ShowLoseUI()
+    {
+        loseUI.SetActive(true);
+    }
+    
 }
